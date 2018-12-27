@@ -11,14 +11,12 @@ import java.util.List;
 public class Dot {
 	
 	
-	private int x;
-	private int y;
+	Pair <Integer, Integer> location;
 	private int max_num_edge ;
 	List < Dot > l = new ArrayList < Dot >(); 
 
 	public Dot(int r,int c,int n) {
-		this.x=r;
-		this.y=c;
+		location = new Pair<r, c>;
 		this.max_num_edge=n;
 	}
 	
