@@ -3,6 +3,8 @@ package dots_and_boxes;
 import java.util.*; 
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.util.Pair;
 /**
  * @author bashar modallal
  *
@@ -11,12 +13,12 @@ import java.util.List;
 public class Dot {
 	
 	
-	Pair <Integer, Integer> location;
+	
 	private int max_num_edge ;
-	List < Dot > l = new ArrayList < Dot >(); 
-
+	List < Pair<Integer, Integer>> connected_Dots = new ArrayList < Pair<Integer, Integer>>(); 
+	List <Pair<String, Boolean>> valide_Directions = new ArrayList<Pair<String, Boolean>>(); //this list will be filled after setting the board to determine the way of connecting.
 	public Dot(int r,int c,int n) {
-		location = new Pair<r, c>;
+		connected_Dots.add(new Pair<>(r, c));
 		this.max_num_edge=n;
 	}
 	
