@@ -15,10 +15,13 @@ public class Dot {
 	
 	
 	private int max_num_edge ;
-	List < Pair<Integer, Integer>> connected_Dots = new ArrayList < Pair<Integer, Integer>>(); 
-	List <Pair<String, Boolean>> valide_Directions = new ArrayList<Pair<String, Boolean>>(); //this list will be filled after setting the board to determine the way of connecting.
+	Pair <Integer, Integer> location; // x , y for the dot it self.
+	List < Pair<Integer, Integer>> connected_Dots;
+	List <Pair<String, Boolean>> valide_Directions; //this list will be filled-(In Board Class )-after setting the board to determine the way of connecting.
 	public Dot(int r,int c,int n) {
-		connected_Dots.add(new Pair<>(r, c));
+		// Adding the dot location....
+		location = new Pair<>(r, c);
+		// Initializing the max number of connecting capacity.....
 		this.max_num_edge=n;
 	}
 	
