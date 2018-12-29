@@ -23,42 +23,64 @@ public class Game {
 		
 		//stop condition 
 		if(b.isfinal()) {
-			
+		 	
 		}
 		// move to all  point 
-		for(int i=0; i<b.width;i++)
-			for(int j=0;j<b.hight;j++) {
+		if(player =="pc") {
+			int value =-1000;
+			for(int i=0; i<b.width;i++)
+				for(int j=0;j<b.hight;j++) {
 				
-				if(j+1<b.hight && ! b.dots[i][j].is_connected(i,j+1 )) {
-					b.add_edge(i, j, i, j+1);
-					//calculate scores to decide turn who after this move
-					b.calc_score("pc");
-					//recursion
-					
-					//backtracking 
-					b.delete_edge(i, j, i, j+1 );
-				}
-				if(j-1 > 0  && ! b.dots[i][j].is_connected(i,j-1 )) {
-					
-					
-				}
-				if(i+1<b.width &&! b.dots[i][j].is_connected(i+1,j )) {
-					
-					
-				}
-				if(i-1 > 0  && ! b.dots[i][j].is_connected(i-1,j )) {
-					
-					
-				}
-				
-				
-				
-				
-				
-				
+					if(j+1<b.hight && ! b.dots[i][j].is_connected(i,j+1 )) {
+						int score_pc = b.score_pc;
+						b.add_edge(i, j, i, j+1);
+						//calculate scores to decide turn who after this move
+						int new_score_pc = b.calc_score("pc");
+						if(new_score_pc > score_pc)
+						{
+					    	//recursion
+							int best_value = Math.max( minimax(b, depth+1,"pc"), value );
+
+						}
+						else {
+						  int best_value =Math.min( minimax(b,depth+1,"human") , value );
+						}
+						//backtracking 
+						b.delete_edge(i, j, i, j+1 );
+					}
+					if(j-1 > 0  && ! b.dots[i][j].is_connected(i,j-1 )) {
+						int score_pc = b.score_pc;
+						b.add_edge(i, j, i, j-1);
+						//calculate scores to decide turn who after this move
+						int new_score_pc = b.calc_score("pc");
+						if(new_score_pc > score_pc)
+						{
+					    	//recursion
+							int best_value = Math.max( minimax(b, depth+1,"pc"), value );
+
+						}
+						else {
+						  int best_value =Math.min( minimax(b,depth+1,"human") , value );
+						}
+						//backtracking 
+						b.delete_edge(i, j, i, j-1 );
+					}
+					if(i+1<b.width &&! b.dots[i][j].is_connected(i+1,j )) {
+						
+						
+					}
+					if(i-1 > 0  && ! b.dots[i][j].is_connected(i-1,j )) {
+						
+						
+					}			
 			}
+		}
 		
-		
+		else if(player == "human")
+		{
+			
+			
+		}
 		
 		
 		
