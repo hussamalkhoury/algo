@@ -26,10 +26,51 @@ public class Game {
 		 	
 		}
 		// move to all  point 
+<<<<<<< HEAD
 		if(player =="pc") {
 			int value =-1000;
 			for(int i=0; i<b.width;i++)
 				for(int j=0;j<b.hight;j++) {
+=======
+		for(int i=0; i<b.width;i++)
+			for(int j=0;j<b.hight;j++) {
+				
+				if(j+1<b.hight && ! b.dots[i][j].is_connected(i,j+1 )) {
+					b.add_edge(i, j, i, j+1);
+					//calculate scores to decide turn who after this move
+					b.calc_score("pc");
+					//recursion
+					
+					//backtracking 
+					b.delete_edge(i, j, i, j+1 );
+				}
+				if(j-1 > 0  && ! b.dots[i][j].is_connected(i,j-1 )) {
+				
+				}
+				if(i+1<b.width &&! b.dots[i][j].is_connected(i+1,j )) {
+					b.add_edge(i, j, i+1, j);
+					//calculate scores to decide turn who after this move
+					b.calc_score("pc");
+					//recursion
+					
+					//backtracking 
+					b.delete_edge(i, j, i+1, j );
+				}
+				if(i-1 > 0  && ! b.dots[i][j].is_connected(i-1,j )) {
+					b.add_edge(i, j, i-1, j);
+					//calculate scores to decide turn who after this move
+					b.calc_score("pc");
+					//recursion
+					
+					//backtracking 
+					b.delete_edge(i, j, i-1, j );
+				}
+				
+				
+				
+				
+				
+>>>>>>> 3117fd79bdfd854e11d056ffbf6fda899d5a13e4
 				
 					if(j+1<b.hight && ! b.dots[i][j].is_connected(i,j+1 )) {
 						int score_pc = b.score_pc;
