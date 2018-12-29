@@ -1,16 +1,16 @@
 package dots_and_boxes;
-
-import java.util.Iterator;
-import java.util.List;
+//
+//import java.util.Iterator;
+//import java.util.List;
 
 import javafx.util.Pair;
 
 public class Board {
 	
 	//Members.......
-	private int width;
-	private int hight;
-	private Dot[][] dots;
+	public int width;
+	public int hight;
+	public Dot[][] dots;
 	public int score_pc =0;
 	public int score_player=0;
 	
@@ -137,7 +137,7 @@ public class Board {
 	//Fields........
 
 
-	public boolean isfinal (Board b) {
+	public boolean isfinal () {
 		
 		for (int i=0;i < this.width; i++)
 			for(int j=0;  j < this.hight; j++) {
@@ -157,18 +157,21 @@ public class Board {
 	
 	
 	
-	public void calc_score(Board b,String player) {
+	public int  calc_score(String player) {
 //		player = "human" is human player
 //		player ="pc" is PC player
-		boolean visited [][] =new boolean [b.hight][b.width];
-		for(int i=0;i<b.width;i++)
-			for(int j=0;j<b.hight;j++)
+	
+		
+		
+		boolean visited [][] =new boolean [this.hight][this.width];
+		for(int i=0;i<this.width;i++)
+			for(int j=0;j<this.hight;j++)
 				visited[i][j]=false;		
 		
 		// for each point we are going like circle
 		
-		for(int i=0;i<b.width;i++)
-			for(int j=0;j<b.hight;j++)
+		for(int i=0;i<this.width;i++)
+			for(int j=0;j<this.hight;j++)
 			{	
 				if(j+1 < this.hight && !visited[i][j+1]&&  dots[i][j].is_connected(i, j+1)   ) //check right
 					if(j+1<this.hight && i+1<this.width &&!visited[i+1][j+1] && dots[i][j+1].is_connected(i+1, j+1)  )//then check down 
@@ -176,8 +179,8 @@ public class Board {
 							if(!visited[i][j] && dots[i][j].is_connected(i, j+1) ) 
 							{					
 							   visited[i][j]=true;
-							   if(player=="human") this.score_player++;
-							   else if(player=="pc") this.score_pc++;
+							   if(player=="human") { this.score_player++;}
+							   else if(player=="pc") { this.score_pc++;}
 							   
 							}
 				
@@ -187,8 +190,8 @@ public class Board {
 							if(!visited[i][j] && dots[i][j+1].is_connected(i, j) )   //then check Left
 							{					
 							   visited[i][j]=true;
-							   if(player=="human") this.score_player++;
-							   else if(player=="pc") this.score_pc++;
+							   if(player=="human") {this.score_player++;}
+							   else if(player=="pc") {this.score_pc++;}
 							   
 							}
 
@@ -198,8 +201,8 @@ public class Board {
 							if(!visited[i][j] && dots[i][j+1].is_connected(i, j) )   //then check Down
 							{					
 							   visited[i][j]=true;
-							   if(player=="human") this.score_player++;
-							   else if(player=="pc") this.score_pc++;
+							   if(player=="human") {this.score_player++;}
+							   else if(player=="pc") {this.score_pc++;}
 							   
 							}
 			
@@ -209,12 +212,20 @@ public class Board {
 							if(!visited[i][j] && dots[i][j-1].is_connected(i, j) )   //then check Right
 							{					
 							   visited[i][j]=true;
-							   if(player=="human") this.score_player++;
-							   else if(player=="pc") this.score_pc++;
+							   if(player=="human") {this.score_player++;}
+							   else if(player=="pc") {this.score_pc++;}
 							   
 							}
 			
 						}
+		 if(player=="human") 
+		 {
+			 return this.score_player;
+		 }
+		 else if (player=="pc")
+			 return this.score_pc;
+		 
+		 return 0;
 		
 	}//end function calc_score
 	
@@ -225,8 +236,19 @@ public class Board {
 	public void add_edge(int x,int y ,int x_end, int y_end) {
 		this.dots[x][y].connected_Dots.add( new Pair<>(x_end,y_end) );
 	}
+
+	public void delete_edge(int x,int y ,int x_end, int y_end) {
+		for (int i=0; i < this.dots[x][y].connected_Dots.size() ;i++)
+		{		
+			if(this.dots[x][y].connected_Dots.get(i).getKey() == x_end &&
+					this.dots[x][y].connected_Dots.get(i).getKey() == y_end	) {
+				this.dots[x][y].connected_Dots.remove(i);
+			}
+		
+		 }
 	
 	
+	}
 }
 
 
